@@ -14,7 +14,9 @@ int PASCAL NewBind(SOCKET s, const sockaddr* addr, int namelen)
     if (addr->sa_family == AF_INET)
     {
         auto addr_in = (sockaddr_in*)addr;
-        addr_in->sin_addr.s_addr = htonl(INADDR_ANY);
+        if (addr_in->sin_port == htons(1022)) {
+            addr_in->sin_addr.s_addr = htonl(INADDR_ANY);
+        }
     }
     else if (addr->sa_family == AF_INET6)
     {
